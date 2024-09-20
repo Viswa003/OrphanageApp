@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Upcoming Events</h1>
+    </header>
+
+    <main>
+        <ul>
+            <% events.forEach(event => { %>
+                <li>
+                    <h3><%= event.title %></h3>
+                    <p><%= event.description %></p>
+                    <p>Date: <%= event.date.toDateString() %></p>
+                    <p>Location: <%= event.location %></p>
+                    <p>Created by: <%= event.createdBy.name %></p>
+                </li>
+            <% }) %>
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Orphanage Management. All rights reserved.</p>
+    </footer>
+</body>
+</html>
