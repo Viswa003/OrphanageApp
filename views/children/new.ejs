@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Child - Orphanage Management System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Add New Child</h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="/" class="btn">Home</a></li>
+                <li><a href="/children" class="btn">Back to Children List</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <form action="/children" method="POST">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div>
+                    <label for="dateOfBirth">Date of Birth:</label>
+                    <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                </div>
+
+                <div>
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="orphanage">Orphanage:</label>
+                    <select id="orphanage" name="orphanage" required>
+                        <% orphanages.forEach(orphanage => { %>
+                            <option value="<%= orphanage._id %>"><%= orphanage.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="educationLevel">Education Level:</label>
+                    <input type="text" id="educationLevel" name="educationLevel">
+                </div>
+
+                <div>
+                    <label for="medicalNeeds">Medical Needs:</label>
+                    <textarea id="medicalNeeds" name="medicalNeeds"></textarea>
+                </div>
+
+                <button type="submit">Add Child</button>
+            </form>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Orphanage Management System. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
