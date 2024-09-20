@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Details</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Donation Details</h1>
+    </header>
+
+    <main>
+        <h2><%= donation.donorName %></h2>
+        <p>Amount: <%= donation.amount %></p>
+        <p>Date: <%= donation.date.toDateString() %></p>
+        <p>Message: <%= donation.message %></p>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Orphanage Management. All rights reserved.</p>
+    </footer>
+</body>
+</html>

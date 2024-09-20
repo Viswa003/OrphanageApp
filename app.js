@@ -13,7 +13,6 @@ const orphanageRoutes = require('./routes/orphanageRoutes');
 const childRoutes = require('./routes/childRoutes');
 const volunteerRoutes = require('./routes/volunteerRoutes');
 const needsRoutes = require('./routes/needRoutes');
-const childRoutes = require('./routes/childRoutes');
 
 const app = express();
 

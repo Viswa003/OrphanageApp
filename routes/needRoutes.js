@@ -3,7 +3,7 @@ const router = express.Router();
 const Need = require('../models/Need');
 const Orphanage = require('../models/Orphanage');
 
-router.get('/needs', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const needs = await Need.find().populate('orphanage');
         const needsWithOrphanageNames = needs.map(need => ({

@@ -8,13 +8,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto px-4">
-        <header class="bg-white shadow-md rounded-lg mt-8 p-6">
+    <div class="container mx-auto px-4 py-6">
+        <header class="bg-white shadow-md rounded-lg mb-6 p-6">
             <h1 class="text-3xl font-bold text-gray-800">Welcome to Orphanage Management System</h1>
         </header>
 
-        <nav class="bg-white shadow-md rounded-lg mt-4 p-4">
-            <ul class="flex space-x-4">
+        <nav class="bg-white shadow-md rounded-lg mb-6 p-4">
+            <ul class="flex flex-wrap space-x-4">
                 <li><a href="/events" class="btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Events</a></li>
                 <li><a href="/donations" class="btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Donations</a></li>
                 <li><a href="/needs" class="btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Needs</a></li>
@@ -30,7 +30,7 @@
             </ul>
         </nav>
 
-        <main class="mt-8">
+        <main class="mb-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h2 class="text-xl font-semibold mb-4">Recent Events</h2>
@@ -47,7 +47,7 @@
             </div>
         </main>
 
-        <footer class="mt-8 text-center text-gray-600">
+        <footer class="text-center text-gray-600 mt-8">
             <p>&copy; 2024 Orphanage Management System. All Rights Reserved.</p>
         </footer>
     </div>
