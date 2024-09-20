@@ -3,20 +3,17 @@ const router = express.Router();
 const Need = require('../models/Need');
 const Orphanage = require('../models/Orphanage');
 
-// Route to view needs of a specific orphanage
-router.get('/:orphanageId', async (req, res) => {
+router.get('/needs', async (req, res) => {
     try {
-        const orphanageId = req.params.orphanageId;
-        const orphanage = await Orphanage.findById(orphanageId);
-        if (!orphanage) {
-            return res.status(404).send('Orphanage not found');
-        }
-        
-        const needs = await Need.find({ orphanage: orphanageId });
-        res.render('needs', { orphanage, needs });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error fetching needs.');
+        const needs = await Need.find().populate('orphanage');
+        const needsWithOrphanageNames = needs.map(need => ({
+            ...need.toObject(),
+            orphanageName: need.orphanage.name
+        }));
+        res.render('needs', { needs: needsWithOrphanageNames });
+    } catch (err) {
+        console.error('Error fetching needs:', err);
+        res.status(500).send('Server Error');
     }
 });
 

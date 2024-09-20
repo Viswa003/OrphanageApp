@@ -12,6 +12,8 @@ const needRoutes = require('./routes/needRoutes'); // Ensure this line is presen
 const orphanageRoutes = require('./routes/orphanageRoutes');
 const childRoutes = require('./routes/childRoutes');
 const volunteerRoutes = require('./routes/volunteerRoutes');
+const needsRoutes = require('./routes/needRoutes');
+const childRoutes = require('./routes/childRoutes');
 
 const app = express();
 
@@ -82,6 +84,8 @@ app.use('/orphanages', orphanageRoutes);
 app.use('/children', childRoutes);
 app.use('/volunteers', volunteerRoutes);
 app.use('/events', eventRoutes);
+app.use('/needs', needsRoutes);
+app.use('/children', childRoutes);
 
 
 // Home Route
