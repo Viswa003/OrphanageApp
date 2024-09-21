@@ -1,55 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orphanage Management System</title>
-    <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <div class="container mx-auto px-4 py-6">
-        <header class="bg-white shadow-md rounded-lg mb-6 p-6">
-            <h1 class="text-3xl font-bold text-gray-800">Welcome to Orphanage Management System</h1>
-        </header>
+    <style>
+        /* Custom CSS for background images */
+        .bg-hero {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
 
-        <nav class="bg-white shadow-md rounded-lg mb-6 p-4">
-            <ul class="flex flex-wrap space-x-4">
-                <li><a href="/events" class="btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Events</a></li>
-                <li><a href="/donations" class="btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Donations</a></li>
-                <li><a href="/needs" class="btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Needs</a></li>
-                <% if (user && user.role === 'OrphanageAdmin') { %>
+        .bg-overlay {
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Ensure footer sticks to the bottom */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* Reduce font sizes */
+        .custom-font {
+            font-size: 0.85rem;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+
+<body class="bg-hero bg-gray-100 text-gray-800">
+    <div class="bg-overlay min-h-screen flex flex-col">
+        <!-- Header Section -->
+        <header class="bg-white shadow-lg rounded-lg mb-8 p-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-gray-900">Orphanage Management System</h1>
+            </div>
+            <!-- Navigation Section -->
+            <nav>
+                <ul class="flex flex-wrap space-x-4 text-sm">
+                    <li><a href="/events" class="btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Events</a></li>
+                    <li><a href="/donations" class="btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Donations</a></li>
+                    <li><a href="/needs" class="btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Needs</a></li>
+                    <% if (user && user.role === 'OrphanageAdmin') { %>
                     <li><a href="/children" class="btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">Manage Children</a></li>
-                <% } %>
-                <% if (user) { %>
+                    <li><a href="/children/new" class="btn bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded">Add Child</a></li>
+                    <% } %>
+                    <% if (user) { %>
                     <li><a href="/users/logout" class="btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Logout</a></li>
-                <% } else { %>
+                    <% } else { %>
                     <li><a href="/users/login" class="btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">Login</a></li>
                     <li><a href="/users/register" class="btn bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">Sign Up</a></li>
-                <% } %>
-            </ul>
-        </nav>
+                    <% } %>
+                </ul>
+            </nav>
+        </header>
 
-        <main class="mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold mb-4">Recent Events</h2>
-                    <!-- Add logic to display recent events -->
+        <!-- Main Content Section -->
+        <main class="flex-grow">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Recent Events -->
+                <div class="bg-white p-6 rounded-lg shadow-md custom-font">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Recent Events</h2>
+                    <ul>
+                        <% if (recentEvents.length > 0) { %>
+                        <% recentEvents.forEach(event => { %>
+                        <li class="mb-4">
+                            <h3 class="text-lg font-semibold"><%= event.title %></h3>
+                            <p><%= event.description %></p>
+                            <p class="text-gray-600"><%= event.date.toDateString() %> | <%= event.location %></p>
+                        </li>
+                        <% }) %>
+                        <% } else { %>
+                        <p>No recent events available.</p>
+                        <% } %>
+                    </ul>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold mb-4">Urgent Needs</h2>
-                    <!-- Add logic to display urgent needs -->
+
+                <!-- Urgent Needs -->
+                <div class="bg-white p-6 rounded-lg shadow-md custom-font">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Urgent Needs</h2>
+                    <ul>
+                        <% if (urgentNeeds.length > 0) { %>
+                        <% urgentNeeds.forEach(need => { %>
+                        <li class="mb-4">
+                            <h3 class="text-lg font-semibold"><%= need.title %></h3>
+                            <p><%= need.description %></p>
+                            <p class="text-gray-600">Amount Required: $<%= need.amountRequired %></p>
+                        </li>
+                        <% }) %>
+                        <% } else { %>
+                        <p>No urgent needs available.</p>
+                        <% } %>
+                    </ul>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold mb-4">Latest Donations</h2>
-                    <!-- Add logic to display recent donations -->
+
+                <!-- Latest Donations -->
+                <div class="bg-white p-6 rounded-lg shadow-md custom-font">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Latest Donations</h2>
+                    <ul>
+                        <% if (latestDonations.length > 0) { %>
+                        <% latestDonations.forEach(donation => { %>
+                        <li class="mb-4">
+                            <h3 class="text-lg font-semibold"><%= donation.donorName %></h3>
+                            <p>Donated: $<%= donation.amount %></p>
+                            <p class="text-gray-600"><%= donation.date.toDateString() %></p>
+                            <% if (donation.message) { %>
+                            <p class="text-gray-600">Message: "<%= donation.message %>"</p>
+                            <% } %>
+                        </li>
+                        <% }) %>
+                        <% } else { %>
+                        <p>No recent donations available.</p>
+                        <% } %>
+                    </ul>
                 </div>
+
+                <% if (user && user.role === 'OrphanageAdmin') { %>
+                <!-- Children Management -->
+                <div class="bg-white p-6 rounded-lg shadow-md custom-font col-span-full">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Children Management</h2>
+                    <a href="/children" class="block bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-6 rounded text-center">View All Children</a>
+                    <a href="/children/new" class="block mt-4 bg-teal-500 hover:bg-teal-600 text-white font-bold py-4 px-6 rounded text-center">Add New Child</a>
+                </div>
+                <% } %>
             </div>
         </main>
 
-        <footer class="text-center text-gray-600 mt-8">
+        <!-- Footer Section -->
+        <footer class="bg-white text-center text-gray-600 py-4 footer-text">
             <p>&copy; 2024 Orphanage Management System. All Rights Reserved.</p>
         </footer>
     </div>
 </body>
+
 </html>

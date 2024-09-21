@@ -65,7 +65,9 @@ footer {
     color: #fff;
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 1280px;
+    padding-right: 20;
+    padding-bottom: 0px;
 }
 
 /* Forms */
