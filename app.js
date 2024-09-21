@@ -12,11 +12,11 @@ const needRoutes = require('./routes/needRoutes'); // Ensure this line is presen
 const orphanageRoutes = require('./routes/orphanageRoutes');
 const childRoutes = require('./routes/childRoutes');
 const volunteerRoutes = require('./routes/volunteerRoutes');
-
+const needsRoutes = require('./routes/needRoutes');
+const indexRoutes = require('./routes/indexRoutes'); 
 const app = express();
 
 // Middleware
-app.use('/donations', donationRoutes); // Ensure this line is present
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -74,6 +74,7 @@ mongoose.connect('mongodb://localhost:27017/orphanageDB', {
   .catch((err) => console.log('Error: ' + err));
 
 // Routes
+app.use('/', indexRoutes);
 app.use('/users', userRoutes);
 app.use('/events', eventRoutes);
 app.use('/donations', donationRoutes);
@@ -82,6 +83,9 @@ app.use('/orphanages', orphanageRoutes);
 app.use('/children', childRoutes);
 app.use('/volunteers', volunteerRoutes);
 app.use('/events', eventRoutes);
+app.use('/needs', needsRoutes);
+app.use('/children', childRoutes);
+app.use('/donations', donationRoutes);
 
 
 // Home Route

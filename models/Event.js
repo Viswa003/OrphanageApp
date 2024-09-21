@@ -19,9 +19,10 @@ const eventSchema = new mongoose.Schema({
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // The orphanage admin who created the event
+        ref: 'User',
         required: true
     }
 });
 
-module.exports = mongoose.model('Event', eventSchema);
+// Check if the model already exists before defining it again
+module.exports = mongoose.models.Event || mongoose.model('Event', eventSchema);
